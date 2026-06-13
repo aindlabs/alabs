@@ -25,7 +25,7 @@ export function Logo({ className, markOnly = false }: LogoProps) {
     >
       <span
         aria-hidden
-        className="grid size-9 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-accent font-semibold text-primary-foreground shadow-sm transition-transform group-hover:scale-105"
+        className="grid size-9 place-items-center rounded-lg bg-linear-to-br from-brand to-brand-accent font-semibold text-primary-foreground shadow-sm transition-transform group-hover:scale-105"
       >
         {siteConfig.name.charAt(0)}
       </span>
