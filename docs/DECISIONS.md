@@ -152,3 +152,26 @@ the root with no-clobber (protecting the existing `CLAUDE.md`/specs), then set
 
 **Consequences.** One-time setup quirk, documented here so the folder/package
 name mismatch (`ALabs` dir vs `a-labs` package) isn't mistaken for an error.
+
+---
+
+## ADR-0009 — Documentation structure: one rules file, `docs/` for the rest
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** Behavioral rules were split across `CLAUDE.md`, `BeforeMajorTask.md`,
+and `PROJECT.md`, and the repo root was cluttered with markdown — extra files to
+track on every task.
+
+**Decision.** Make `CLAUDE.md` the **single source of behavioral rules** (it is
+auto-loaded and must stay at root); fold `BeforeMajorTask.md` and the generated
+`AGENTS.md` into it. Move all reference docs under `docs/`
+(`PROJECT.md`, `ARCHITECTURE.md`, `COMPONENTS.md`, `DECISIONS.md`), keeping only
+`README.md` + `CHANGELOG.md` at root by convention. Establish a
+"after every major milestone, update PROJECT/COMPONENTS/ARCHITECTURE docs" rule.
+
+**Consequences.** One place to read process rules; a tidy root; reference docs
+grouped and discoverable. Cost: docs must be kept current — enforced by the
+maintenance rule in `CLAUDE.md`. The brief now lives at `docs/PROJECT.md`
+(update references accordingly).

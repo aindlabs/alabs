@@ -32,15 +32,23 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   mobile sheet) and `Footer`, plus a `Logo` component.
 - **App wiring** — root layout with Geist fonts, config-driven SEO metadata,
   dark theme, and the header/footer shell; a foundation placeholder home page.
-- **Project docs** — architecture decision log (`docs/DECISIONS.md`) and this
-  changelog.
+- **Project docs** — architecture decision log (`docs/DECISIONS.md`),
+  architecture + folder-structure notes (`docs/ARCHITECTURE.md`), component
+  inventory (`docs/COMPONENTS.md`), and this changelog.
+- **Line-ending policy** — `.gitattributes` normalizing the repo to LF.
 
 ### Changed
 
 - Strengthened `tsconfig.json` beyond `strict` (`noUncheckedIndexedAccess`,
   `noImplicitOverride`, `noFallthroughCasesInSwitch`,
   `forceConsistentCasingInFileNames`).
+- **Restructured documentation** — consolidated all behavioral rules into a
+  single `CLAUDE.md`, moved the product brief to `docs/PROJECT.md`, and rewrote
+  `README.md` as a project entry point. Added a "after every major milestone"
+  doc-maintenance rule.
 
 ### Removed
 
 - Default create-next-app placeholder assets (`public/*.svg`).
+- `BeforeMajorTask.md` (folded into `CLAUDE.md`) and the generated `AGENTS.md`
+  (its Next.js caution folded into `CLAUDE.md`).
