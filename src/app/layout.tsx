@@ -22,14 +22,21 @@ const geistMono = Geist_Mono({
  * Root metadata. `metadataBase` resolves relative OG/canonical URLs; the title
  * template appends the brand name to every child page's title. Per-page tags
  * come from `buildMetadata` so SEO stays consistent across routes.
+ *
+ * Note the ordering: `buildMetadata` is spread first (it supplies the home OG/
+ * Twitter/canonical tags), then the structured `title` object overrides the
+ * flat title so the home page keeps its descriptive default and child pages get
+ * the `%s | A Labs` template.
  */
+const homeTitle = `${siteConfig.name} — Software Engineering & IT Consulting`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  ...buildMetadata({ title: homeTitle }),
   title: {
-    default: `${siteConfig.name} — Software Engineering & IT Consulting`,
+    default: homeTitle,
     template: `%s | ${siteConfig.name}`,
   },
-  ...buildMetadata(),
   applicationName: siteConfig.name,
   robots: { index: true, follow: true },
 };
