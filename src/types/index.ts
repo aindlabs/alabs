@@ -10,5 +10,9 @@ export type {
   SocialLink,
   Service,
   CallToAction,
+  Stat,
+  ProcessStep,
+  Value,
+  SectionContent,
   SiteConfig,
 } from "./content";

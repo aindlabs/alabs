@@ -58,6 +58,36 @@ export interface CallToAction {
   readonly variant?: "primary" | "secondary" | "ghost";
 }
 
+/** A headline metric (e.g. "120+" / "Projects delivered"). */
+export interface Stat {
+  readonly value: string;
+  readonly label: string;
+}
+
+/** A step in the delivery process. */
+export interface ProcessStep {
+  readonly title: string;
+  readonly description: string;
+  readonly icon: IconComponent;
+}
+
+/** A guiding engineering value/principle shown in the About section. */
+export interface Value {
+  readonly title: string;
+  readonly description: string;
+  readonly icon: IconComponent;
+}
+
+/**
+ * Editorial copy for a section header. Keeps section titles/intros config-driven
+ * (rendered by `SectionHeader`) rather than hardcoded in components.
+ */
+export interface SectionContent {
+  readonly eyebrow?: string;
+  readonly title: string;
+  readonly description?: string;
+}
+
 /** Brand/company identity used across the shell and metadata. */
 export interface SiteConfig {
   readonly name: string;
