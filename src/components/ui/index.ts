@@ -6,3 +6,5 @@
 export { Container, type ContainerProps } from "./container";
 export { Section, type SectionProps } from "./section";
 export { Heading, Eyebrow, Lead, type HeadingProps } from "./typography";
+export { Reveal, RevealGroup } from "./reveal";
+export { IconBadge } from "./icon-badge";
