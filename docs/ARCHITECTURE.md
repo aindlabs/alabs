@@ -53,7 +53,7 @@ e:/Code/AI/ALabs
     │   ├── ui/             # reusable primitives + shadcn components
     │   ├── layout/         # header, footer, logo (the app shell)
     │   ├── icons/          # custom brand SVGs (IconComponent-compatible)
-    │   └── sections/       # config-driven page sections (added per milestone)
+    │   └── sections/       # config-driven page sections (Hero, Services, About, Process, Cta) + building blocks
     ├── constants/          # site config (brand, nav, footer, CTA)
     ├── data/               # content collections (e.g. services)
     ├── hooks/              # shared React hooks (added when needed)
@@ -69,8 +69,10 @@ e:/Code/AI/ALabs
 - **Imports** use the `@/*` alias (→ `src/`). Prefer barrels (`@/types`,
   `@/components/ui`); shadcn components are imported by their own path.
 - **Server vs. client** — components are server components by default; add
-  `"use client"` only when interactivity/browser APIs are required (e.g. the
-  header's scroll state + mobile sheet).
+  `"use client"` only when interactivity/browser APIs are required. Sections
+  stay server-rendered (SEO); animation is isolated to the `Reveal`/`RevealGroup`
+  client islands, which a server section can render as children. The header's
+  scroll state + mobile sheet are the other client boundary.
 - **Styling** uses design tokens via Tailwind utilities (`bg-background`,
   `text-primary`, …). Compose classes with `cn()`; never hardcode hex colors.
 - **Variants** are expressed with `class-variance-authority`, not ad-hoc

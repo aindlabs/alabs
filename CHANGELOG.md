@@ -12,6 +12,25 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Landing page** — config-driven sections composed on the home page in nav
+  order: `Hero` (the page `<h1>`), `Services` (grid from the catalog), `About`
+  (intro + stats + engineering values), `Process` (`#work`), and `Cta`
+  (`#contact`). Nav anchors now resolve to real sections.
+- **Reusable section building blocks** — `Reveal`/`RevealGroup` scroll-motion
+  islands (reduced-motion aware), `SectionHeader`, `FeatureCard`, `ServiceCard`,
+  and the `IconBadge` primitive. shadcn `card` added on demand.
+- **Content** — `data/process.ts`, `data/stats.ts`, `data/values.ts`,
+  `constants/sections.ts` (section copy), and the `Stat` / `ProcessStep` /
+  `Value` / `SectionContent` models.
+
+### Fixed
+
+- Home page `<title>`/`og:title` now use the descriptive default
+  ("A Labs — Software Engineering & IT Consulting") instead of being overridden
+  to just "A Labs" by the metadata spread order.
+
+### Added (foundation)
+
 - **Project foundation** — Next.js 16 (App Router) + React 19 + TypeScript
   (strict) + Tailwind v4, scaffolded into the repo root.
 - **Design system** — OKLCH dark-first design tokens in `globals.css` (color

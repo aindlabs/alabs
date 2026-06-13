@@ -74,3 +74,9 @@ Development Rules:
 * Document major architectural decisions.
 * Keep the codebase maintainable for a team of engineers.
 * Make Content Config-Driven
+
+## Status
+
+* **Foundation** — complete: design system, content/config layer, layout shell, SEO metadata.
+* **Landing page** — complete: Hero, Services, About, Process, CTA (config-driven, animated, accessible).
+* **Next** — dedicated service routes (`/services/[slug]`), sitemap/robots, contact form, and JSON-LD structured data.

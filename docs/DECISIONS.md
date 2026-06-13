@@ -175,3 +175,27 @@ auto-loaded and must stay at root); fold `BeforeMajorTask.md` and the generated
 grouped and discoverable. Cost: docs must be kept current — enforced by the
 maintenance rule in `CLAUDE.md`. The brief now lives at `docs/PROJECT.md`
 (update references accordingly).
+
+---
+
+## ADR-0010 — Server sections with isolated motion islands
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** Landing-page sections need scroll-reveal animation (a client
+concern via Framer Motion) but must remain server-rendered so their content is
+in the initial HTML for SEO. Re-declaring motion props in every section would
+also duplicate logic.
+
+**Decision.** Keep section components as server components that render content
+from `data/`/`constants/`, and isolate all animation in two client primitives —
+`Reveal` (single element) and `RevealGroup` (stagger orchestrator) — which a
+server section renders as children. Motion timing lives once in
+`lib/animations.ts`; both islands honor `prefers-reduced-motion`. Section copy is
+config-driven through `constants/sections.ts` + `SectionHeader`.
+
+**Consequences.** Content ships in static HTML (verified: home prerenders fully
+static) while interactions stay client-side; motion behavior changes in one
+place. Slight indirection — a section's animated wrapper is a separate component
+from its content.

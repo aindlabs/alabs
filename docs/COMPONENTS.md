@@ -14,6 +14,9 @@ Legend: **RSC** = React Server Component (default) · **Client** = `"use client"
 | `Heading` | `typography.tsx` | RSC | Type-scale heading; visual `size` decoupled from semantic tag. | `as`: `h1`–`h4`/`p`/`span`; `size`: `display` \| `h1`–`h4` |
 | `Eyebrow` | `typography.tsx` | RSC | Small uppercase brand-colored label above a heading. | standard `<p>` props |
 | `Lead` | `typography.tsx` | RSC | Large muted intro paragraph. | standard `<p>` props |
+| `IconBadge` | `icon-badge.tsx` | RSC | Rounded brand-tinted icon tile (decorative). | `icon`, `className` |
+| `Reveal` | `reveal.tsx` | Client | Scroll-triggered entrance for one element; reduced-motion aware. | `variants`, `asItem` + motion props |
+| `RevealGroup` | `reveal.tsx` | Client | Stagger orchestrator for `Reveal asItem` children. | `variants` + motion props |
 
 Barrel: `@/components/ui` (primitives only).
 
@@ -25,6 +28,7 @@ Added on demand via `npx shadcn add <name>`; imported by path (`@/components/ui/
 | --- | --- | --- |
 | `Button` | `button.tsx` | Variants: `default`/`outline`/`secondary`/`ghost`/`link`/`destructive`; sizes incl. `icon`. Supports `asChild`. |
 | `Sheet` (+ parts) | `sheet.tsx` | Radix Dialog-based slide-over (focus trap, Escape). Parts: `SheetTrigger`, `SheetContent`, `SheetHeader`, `SheetTitle`, `SheetClose`, … |
+| `Card` (+ parts) | `card.tsx` | Surface primitive. Parts: `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`, `CardAction`. |
 
 ## Icons — `src/components/icons/`
 
@@ -47,6 +51,24 @@ Barrel: `@/components/layout`.
 
 ## Page sections — `src/components/sections/`
 
-_None yet._ Marketing sections (Hero, Services, About, CTA, …) will live here,
-composing the primitives above and reading from `data/`/`constants/`. Add rows
-as they are built.
+All sections are RSC (server-rendered for SEO); motion comes from the `Reveal`
+client islands. Copy is config-driven via `constants/sections.ts`; list content
+from `data/`.
+
+| Component | File | Purpose |
+| --- | --- | --- |
+| `Hero` | `hero.tsx` | Top section; the page's single `<h1>` + primary/secondary CTAs. |
+| `Services` | `services.tsx` | `#services` — staggered grid of `ServiceCard` from the catalog. |
+| `About` | `about.tsx` | `#about` — intro + stats grid + engineering values (`FeatureCard`). |
+| `Process` | `process.tsx` | `#work` — numbered delivery steps (numbers derived from order). |
+| `Cta` | `cta.tsx` | `#contact` — closing call to action (mailto until a contact page exists). |
+
+### Section building blocks
+
+| Component | File | Type | Purpose |
+| --- | --- | --- | --- |
+| `SectionHeader` | `section-header.tsx` | RSC | Eyebrow + heading + lead block from `SectionContent`; revealed on scroll. |
+| `FeatureCard` | `feature-card.tsx` | RSC | Shared icon + title + description card (composes `Card` + `IconBadge`); accepts extra body content. |
+| `ServiceCard` | `service-card.tsx` | RSC | `Service` rendered as a `FeatureCard` plus its highlights list. |
+
+Barrel: `@/components/sections`.
