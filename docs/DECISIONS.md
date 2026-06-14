@@ -249,3 +249,28 @@ Satori font is used (no font fetch).
 manual asset work; image copy updates with the content. Images prerender to PNG
 (verified). Trade-off: Satori is not a full browser — layouts use flexbox-only
 CSS and a hex palette rather than the live design tokens.
+
+---
+
+## ADR-0013 — CI on GitHub Actions, CD via host Git integration
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** The project needs automated quality checks and deployment. The
+repo is intended to be public, and the site is commercial (consulting business).
+
+**Decision.** Use **GitHub Actions** for CI — lint + type-check + build on every
+push to `main` and every PR (free and unlimited for public repos). Delegate
+**CD** to the hosting platform's native Git integration (auto-deploy `main`,
+preview URLs per PR) rather than a deploy workflow, so no deploy secrets live in
+the repo. Recommended host: **Cloudflare Pages** (free tier permits commercial
+use, unlimited bandwidth, free subdomain + custom domain) — Vercel's free Hobby
+plan forbids commercial use, and Netlify's free tier caps bandwidth and pauses
+on overage.
+
+**Consequences.** PRs are gated by the same checks we run locally; deploys need
+no in-repo secrets and come with preview environments. Host choice stays
+flexible (the CI is host-agnostic). Note: the production URL must be set in
+`constants/site.ts` once the deploy domain is known (drives metadata, canonical,
+sitemap, and OG image URLs).
