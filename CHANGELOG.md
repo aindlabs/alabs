@@ -12,6 +12,10 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Continuous integration** — GitHub Actions workflow (`.github/workflows/ci.yml`)
+  running lint + type-check + build on every push to `main` and every pull
+  request, with run cancellation for superseded commits. Deployment (CD) is
+  delegated to the host's Git integration (see ADR-0013).
 - **Social share images** — dynamic Open Graph + Twitter images via `next/og`,
   driven by a single branded renderer (`lib/og.tsx`): home, `/services`, and
   per-service `/services/[slug]` (statically generated). Twitter images
