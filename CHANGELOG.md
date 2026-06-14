@@ -12,6 +12,10 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Cloudflare Workers deploy config** — committed OpenNext adapter setup
+  (`wrangler.jsonc`, `open-next.config.ts`, `next.config.ts` dev hook,
+  `@opennextjs/cloudflare` + `wrangler` deps, and `deploy`/`preview`/`cf-build`
+  scripts) so deploys are deterministic instead of relying on an auto-migration.
 - **Continuous integration** — GitHub Actions workflow (`.github/workflows/ci.yml`)
   running lint + type-check + build on every push to `main` and every pull
   request, with run cancellation for superseded commits. Deployment (CD) is
@@ -49,6 +53,11 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **Cloudflare deploy** — the deploy failed with a `WORKER_SELF_REFERENCE`
+  binding pointing at a non-existent Worker `a-labs`, because Cloudflare's
+  build auto-ran the OpenNext migration and derived an inconsistent name.
+  Committing an explicit `wrangler.jsonc` (Worker `alabs`, matching the live
+  URL, with a matching self-reference) makes the deploy deterministic.
 - **Cross-platform lockfile** — regenerated `package-lock.json` so `npm ci`
   succeeds on Linux (CI + Cloudflare). The Windows-generated lockfile was
   missing optional wasm subtree entries (`@emnapi/*`, `@napi-rs/wasm-runtime`)
