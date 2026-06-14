@@ -274,3 +274,32 @@ no in-repo secrets and come with preview environments. Host choice stays
 flexible (the CI is host-agnostic). Note: the production URL must be set in
 `constants/site.ts` once the deploy domain is known (drives metadata, canonical,
 sitemap, and OG image URLs).
+
+---
+
+## ADR-0014 — Deploy to Cloudflare Workers via committed OpenNext config
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** Cloudflare Workers runs Next.js through the OpenNext adapter. With
+no Cloudflare config in the repo, Cloudflare's build pipeline auto-ran the
+OpenNext migration on every build and generated an inconsistent worker name —
+deploying `alabs` but binding `WORKER_SELF_REFERENCE` to a non-existent
+`a-labs` (the `package.json` name) — which failed the deploy.
+
+**Decision.** Commit the OpenNext setup explicitly: `wrangler.jsonc` (Worker
+**`alabs`**, matching the live `alabs.ceo-alabs.workers.dev` URL, with a matching
+self-reference binding), `open-next.config.ts` (no R2 cache — the site is
+static/SSG, no ISR), `initOpenNextCloudflareForDev()` in `next.config.ts`, and
+`@opennextjs/cloudflare` + `wrangler` as dependencies. Cloudflare's **build
+command** becomes `npm run cf-build` (`opennextjs-cloudflare build`) and the
+**deploy command** stays `npx wrangler deploy`, which now reads the committed
+config. Regenerated the lockfile cleanly so the Linux `workerd` binary is
+recorded (the cross-platform `npm ci` requirement from ADR context).
+
+**Consequences.** Deploys are deterministic and reviewable in-repo; the worker
+name and URL are stable. CI (`next build`) stays separate from the heavier
+Cloudflare bundling (`opennextjs-cloudflare build`). Trade-off: dependency
+weight grows (wrangler/workerd), and dependency changes now require a clean
+lockfile regenerate to keep all platform binaries recorded.
