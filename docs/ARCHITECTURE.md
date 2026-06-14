@@ -52,6 +52,7 @@ e:/Code/AI/ALabs
     │   ├── layout.tsx      # shell (header/footer, fonts, metadata)
     │   ├── page.tsx        # home
     │   ├── services/       # /services index + [slug] detail (SSG)
+    │   ├── opengraph-image.tsx / twitter-image.tsx  # social images (per segment)
     │   ├── sitemap.ts      # sitemap.xml
     │   ├── robots.ts       # robots.txt
     │   └── globals.css     # design tokens
@@ -64,7 +65,7 @@ e:/Code/AI/ALabs
     ├── constants/          # site config (brand, nav, footer, CTA) + section copy
     ├── data/               # content collections (services, stats, process, values)
     ├── hooks/              # shared React hooks (added when needed)
-    ├── lib/                # framework-agnostic helpers (cn, seo, animations, structured-data)
+    ├── lib/                # framework-agnostic helpers (cn, seo, animations, structured-data, og)
     └── types/              # shared TypeScript content models
 ```
 
@@ -88,7 +89,10 @@ e:/Code/AI/ALabs
   re-declare motion timing inline.
 - **SEO** — pages build metadata via `lib/seo.ts` (`buildMetadata`); structured
   data comes from `lib/structured-data.ts` builders rendered by `<JsonLd>`;
-  `sitemap.ts`/`robots.ts` are generated from the route map + catalog.
+  `sitemap.ts`/`robots.ts` are generated from the route map + catalog. Social
+  images use the `opengraph-image`/`twitter-image` file convention, all rendered
+  by one branded helper (`lib/og.tsx`); `twitter-image` re-exports its
+  `opengraph-image`.
 - **Dynamic routes** — content-driven routes (e.g. `/services/[slug]`) use
   `generateStaticParams` for SSG, `generateMetadata` for per-route tags, and
   `dynamicParams = false` so only known slugs render (others 404).

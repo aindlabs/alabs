@@ -224,3 +224,28 @@ sitemap, the footer, and cross-links automatically — one source of truth. All
 pages prerender as static HTML (verified). Trade-off: `dynamicParams = false`
 means new slugs require a rebuild — acceptable for a marketing site. JSON-LD is
 typed as a record (schema.org `@`-keys don't map cleanly to a TS interface).
+
+---
+
+## ADR-0012 — Social images via one renderer + file convention
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** Pages needed Open Graph / Twitter share images. Hand-made images
+would drift from the brand and require manual upkeep per page.
+
+**Decision.** Generate images at build with `next/og` using the
+`opengraph-image`/`twitter-image` file convention, all delegating to a single
+branded renderer (`lib/og.tsx`, `renderOgImage({ eyebrow, title })`).
+`twitter-image` re-exports its sibling `opengraph-image` (note: `dynamicParams`
+and `generateStaticParams` must be declared locally — Next can't statically
+parse them when re-exported). Per-service images use `generateStaticParams` +
+`dynamicParams = false` to mirror the page routes. Colors are plain hex
+approximations of the OKLCH tokens (Satori doesn't parse OKLCH); the default
+Satori font is used (no font fetch).
+
+**Consequences.** Every page gets a consistent, on-brand share image with zero
+manual asset work; image copy updates with the content. Images prerender to PNG
+(verified). Trade-off: Satori is not a full browser — layouts use flexbox-only
+CSS and a hex palette rather than the live design tokens.

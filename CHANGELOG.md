@@ -12,6 +12,10 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Social share images** — dynamic Open Graph + Twitter images via `next/og`,
+  driven by a single branded renderer (`lib/og.tsx`): home, `/services`, and
+  per-service `/services/[slug]` (statically generated). Twitter images
+  re-export the Open Graph image. Completes the metadata/JSON-LD/sitemap SEO set.
 - **Service routes** — `/services` index and statically-generated
   `/services/[slug]` detail pages (`generateStaticParams` + per-route
   `generateMetadata`, `dynamicParams = false`, `notFound()` for unknown slugs)
