@@ -86,6 +86,9 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Set the production `url` to `https://alabs.ceo-alabs.workers.dev` (Cloudflare
+  Workers deploy). Drives metadata, canonical links, sitemap, robots, and OG
+  image URLs from one place.
 - Strengthened `tsconfig.json` beyond `strict` (`noUncheckedIndexedAccess`,
   `noImplicitOverride`, `noFallthroughCasesInSwitch`,
   `forceConsistentCasingInFileNames`).

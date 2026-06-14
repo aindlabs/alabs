@@ -39,7 +39,7 @@ export const siteConfig: SiteConfig = {
   shortName: "ALabs",
   description:
     "A Labs is a software engineering and IT consulting studio delivering custom software, full-stack products, cloud solutions, and legacy modernization.",
-  url: "https://alabs.example.com",
+  url: "https://alabs.ceo-alabs.workers.dev",
   locale: "en",
   contact: {
     email: "hello@alabs.example.com",
