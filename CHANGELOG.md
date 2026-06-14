@@ -49,6 +49,10 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **Cross-platform lockfile** — regenerated `package-lock.json` so `npm ci`
+  succeeds on Linux (CI + Cloudflare). The Windows-generated lockfile was
+  missing optional wasm subtree entries (`@emnapi/*`, `@napi-rs/wasm-runtime`)
+  that `npm ci` validates for all platforms, breaking the build.
 - Home page `<title>`/`og:title` now use the descriptive default
   ("A Labs — Software Engineering & IT Consulting") instead of being overridden
   to just "A Labs" by the metadata spread order.
