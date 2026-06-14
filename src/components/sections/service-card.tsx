@@ -17,7 +17,12 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const { icon, title, description, highlights } = service;
 
   return (
-    <FeatureCard icon={icon} title={title} description={description}>
+    <FeatureCard
+      icon={icon}
+      title={title}
+      description={description}
+      href={`/services/${service.slug}`}
+    >
       {highlights && highlights.length > 0 && (
         <ul className="flex flex-col gap-2">
           {highlights.map((highlight) => (
