@@ -48,16 +48,23 @@ e:/Code/AI/ALabs
 │   └── DECISIONS.md        # architecture decision records
 ├── public/                 # static assets
 └── src/
-    ├── app/                # App Router: layout.tsx (shell), page.tsx, globals.css
+    ├── app/                # App Router
+    │   ├── layout.tsx      # shell (header/footer, fonts, metadata)
+    │   ├── page.tsx        # home
+    │   ├── services/       # /services index + [slug] detail (SSG)
+    │   ├── sitemap.ts      # sitemap.xml
+    │   ├── robots.ts       # robots.txt
+    │   └── globals.css     # design tokens
     ├── components/
     │   ├── ui/             # reusable primitives + shadcn components
     │   ├── layout/         # header, footer, logo (the app shell)
     │   ├── icons/          # custom brand SVGs (IconComponent-compatible)
+    │   ├── seo/            # JsonLd structured-data renderer
     │   └── sections/       # config-driven page sections (Hero, Services, About, Process, Cta) + building blocks
-    ├── constants/          # site config (brand, nav, footer, CTA)
-    ├── data/               # content collections (e.g. services)
+    ├── constants/          # site config (brand, nav, footer, CTA) + section copy
+    ├── data/               # content collections (services, stats, process, values)
     ├── hooks/              # shared React hooks (added when needed)
-    ├── lib/                # framework-agnostic helpers (cn, seo, animations)
+    ├── lib/                # framework-agnostic helpers (cn, seo, animations, structured-data)
     └── types/              # shared TypeScript content models
 ```
 
@@ -79,7 +86,12 @@ e:/Code/AI/ALabs
   conditional class strings.
 - **Animation** uses the shared variants in `lib/animations.ts`; do not
   re-declare motion timing inline.
-- **SEO** — pages build metadata via `lib/seo.ts` (`buildMetadata`).
+- **SEO** — pages build metadata via `lib/seo.ts` (`buildMetadata`); structured
+  data comes from `lib/structured-data.ts` builders rendered by `<JsonLd>`;
+  `sitemap.ts`/`robots.ts` are generated from the route map + catalog.
+- **Dynamic routes** — content-driven routes (e.g. `/services/[slug]`) use
+  `generateStaticParams` for SSG, `generateMetadata` for per-route tags, and
+  `dynamicParams = false` so only known slugs render (others 404).
 
 ## Data flow example (footer "Services" column)
 

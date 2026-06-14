@@ -12,6 +12,22 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Service routes** — `/services` index and statically-generated
+  `/services/[slug]` detail pages (`generateStaticParams` + per-route
+  `generateMetadata`, `dynamicParams = false`, `notFound()` for unknown slugs)
+  with breadcrumb, highlights, and related services.
+- **SEO infrastructure** — `app/sitemap.ts` (home + service routes) and
+  `app/robots.ts`; JSON-LD structured data (`lib/structured-data.ts` builders +
+  a reusable `JsonLd` component): Organization + WebSite on the home page,
+  Service on each detail page.
+- **ServiceGrid** — shared staggered grid of `ServiceCard`s, reused by the
+  landing section, the services index, and the "other services" block.
+- Service cards now link to their detail page (accessible stretched-link
+  pattern via an optional `href` on `FeatureCard`).
+- `Service.overview` — longer copy for detail pages.
+
+### Added (landing page)
+
 - **Landing page** — config-driven sections composed on the home page in nav
   order: `Hero` (the page `<h1>`), `Services` (grid from the catalog), `About`
   (intro + stats + engineering values), `Process` (`#work`), and `Cta`

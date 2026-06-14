@@ -67,8 +67,15 @@ from `data/`.
 
 | Component | File | Type | Purpose |
 | --- | --- | --- | --- |
-| `SectionHeader` | `section-header.tsx` | RSC | Eyebrow + heading + lead block from `SectionContent`; revealed on scroll. |
-| `FeatureCard` | `feature-card.tsx` | RSC | Shared icon + title + description card (composes `Card` + `IconBadge`); accepts extra body content. |
-| `ServiceCard` | `service-card.tsx` | RSC | `Service` rendered as a `FeatureCard` plus its highlights list. |
+| `SectionHeader` | `section-header.tsx` | RSC | Eyebrow + heading + lead block from `SectionContent`; revealed on scroll. Use `as`/`size` for page `<h1>`s. |
+| `FeatureCard` | `feature-card.tsx` | RSC | Shared icon + title + description card (composes `Card` + `IconBadge`); accepts extra body content. Optional `href` makes it a stretched link. |
+| `ServiceCard` | `service-card.tsx` | RSC | `Service` as a `FeatureCard` (linked to its detail page) plus its highlights list. |
+| `ServiceGrid` | `service-grid.tsx` | RSC | Staggered responsive grid of `ServiceCard`s; defaults to the full catalog, accepts a subset. |
 
 Barrel: `@/components/sections`.
+
+## SEO — `src/components/seo/`
+
+| Component | File | Purpose |
+| --- | --- | --- |
+| `JsonLd` | `json-ld.tsx` | Renders schema.org JSON-LD from the `lib/structured-data` builders as a `<script type="application/ld+json">`. |

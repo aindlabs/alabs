@@ -79,4 +79,5 @@ Development Rules:
 
 * **Foundation** — complete: design system, content/config layer, layout shell, SEO metadata.
 * **Landing page** — complete: Hero, Services, About, Process, CTA (config-driven, animated, accessible).
-* **Next** — dedicated service routes (`/services/[slug]`), sitemap/robots, contact form, and JSON-LD structured data.
+* **Service routes & SEO** — complete: `/services` index + statically-generated `/services/[slug]` detail pages, sitemap/robots, and JSON-LD structured data.
+* **Next** — contact form/page, blog or case studies, OG images, and analytics.

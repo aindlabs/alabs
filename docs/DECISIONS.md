@@ -199,3 +199,28 @@ config-driven through `constants/sections.ts` + `SectionHeader`.
 static) while interactions stay client-side; motion behavior changes in one
 place. Slight indirection — a section's animated wrapper is a separate component
 from its content.
+
+---
+
+## ADR-0011 — Statically-generated content routes + JSON-LD
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** Each service needs its own indexable page, plus site-wide crawl
+infrastructure (sitemap, robots, structured data). Service content already lives
+in `data/services.ts`.
+
+**Decision.** Drive `/services/[slug]` from the catalog via
+`generateStaticParams` (SSG) + `generateMetadata`, with `dynamicParams = false`
+so only known slugs render and anything else 404s. Generate `sitemap.ts`/
+`robots.ts` from the same catalog. Emit schema.org JSON-LD from typed builders
+in `lib/structured-data.ts` via a reusable `<JsonLd>` component (Organization +
+WebSite on home, Service on detail). Service cards link to detail pages using
+the stretched-link pattern (optional `href` on `FeatureCard`).
+
+**Consequences.** Adding a service propagates to its page, the index, the
+sitemap, the footer, and cross-links automatically — one source of truth. All
+pages prerender as static HTML (verified). Trade-off: `dynamicParams = false`
+means new slugs require a rebuild — acceptable for a marketing site. JSON-LD is
+typed as a record (schema.org `@`-keys don't map cleanly to a TS interface).
