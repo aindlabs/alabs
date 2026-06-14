@@ -8,3 +8,4 @@ export { Cta } from "./cta";
 export { SectionHeader } from "./section-header";
 export { FeatureCard } from "./feature-card";
 export { ServiceCard } from "./service-card";
+export { ServiceGrid } from "./service-grid";

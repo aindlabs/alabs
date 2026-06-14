@@ -46,7 +46,10 @@ export interface SocialLink {
 export interface Service {
   readonly slug: string;
   readonly title: string;
+  /** Short, card-friendly summary. */
   readonly description: string;
+  /** Longer copy for the dedicated service page (falls back to `description`). */
+  readonly overview?: string;
   readonly icon: IconComponent;
   readonly highlights?: readonly string[];
 }
