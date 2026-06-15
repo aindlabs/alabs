@@ -46,4 +46,10 @@ export const sectionContent = {
     description:
       "Tell us what you're building. We'll help you scope it, design the architecture, and ship it.",
   },
+  contact: {
+    eyebrow: "Contact",
+    title: "Let's build something",
+    description:
+      "Tell us about your project and we'll get back to you within one business day.",
+  },
 } satisfies Record<string, SectionContent>;

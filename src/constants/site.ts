@@ -19,7 +19,7 @@ const primaryNav = [
   { label: "Services", href: "/#services" },
   { label: "About", href: "/#about" },
   { label: "Work", href: "/#work" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /**
@@ -66,7 +66,7 @@ export const siteConfig: SiteConfig = {
   ],
   primaryCta: {
     label: "Start a project",
-    href: "/#contact",
+    href: "/contact",
     variant: "primary",
   },
 };

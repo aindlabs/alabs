@@ -9,3 +9,4 @@ export { SectionHeader } from "./section-header";
 export { FeatureCard } from "./feature-card";
 export { ServiceCard } from "./service-card";
 export { ServiceGrid } from "./service-grid";
+export { ContactForm } from "./contact-form";

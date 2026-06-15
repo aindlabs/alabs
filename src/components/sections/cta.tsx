@@ -8,8 +8,8 @@ import { siteConfig } from "@/constants/site";
 
 /**
  * CTA — closing call to action (anchored at #contact).
- * Until a contact page/form exists, the primary action opens the user's mail
- * client to the configured contact address.
+ * Primary action routes to the contact page/form; a direct-email line remains
+ * as a quick alternative.
  */
 export function Cta() {
   const mailto = `mailto:${siteConfig.contact.email}`;
@@ -32,7 +32,7 @@ export function Cta() {
         )}
         <div className="mt-8 flex justify-center">
           <Button asChild size="lg">
-            <Link href={mailto}>
+            <Link href={siteConfig.primaryCta.href}>
               {siteConfig.primaryCta.label}
               <ArrowRight aria-hidden />
             </Link>
