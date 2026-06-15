@@ -18,6 +18,9 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   email delivery via Resend's REST API (`lib/contact/email.ts`, env-driven,
   no SDK), and `useActionState`-driven pending/success/error UI. New
   `Input`/`Textarea`/`Label` primitives.
+- **Active nav highlight** — the header marks the current tab (`aria-current`):
+  route links match the pathname; in-page section links use an
+  `IntersectionObserver` scroll-spy (`useActiveSection`) on the home page.
 
 ### Changed
 
