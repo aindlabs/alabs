@@ -303,3 +303,31 @@ name and URL are stable. CI (`next build`) stays separate from the heavier
 Cloudflare bundling (`opennextjs-cloudflare build`). Trade-off: dependency
 weight grows (wrangler/workerd), and dependency changes now require a clean
 lockfile regenerate to keep all platform binaries recorded.
+
+---
+
+## ADR-0015 — Contact form via server action + Resend (no SDK)
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+**Context.** The site needed a real lead-capture form. The deploy runs on
+Cloudflare Workers (OpenNext), there is no custom domain yet, and we want to
+avoid leaking secrets to the client or adding heavy dependencies.
+
+**Decision.** Post the form to a Next.js **server action** (`app/contact/actions.ts`)
+so the email API key stays server-side. Deliver mail by calling **Resend's REST
+API with `fetch`** (no SDK — lighter on the Worker), configured via env
+(`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`); Resend's
+`onboarding@resend.dev` sender works without a verified domain. Validation is
+typed and hand-rolled (`lib/contact/validation.ts`) rather than adding a schema
+library for three fields. Spam is filtered with a honeypot field; client state
+uses React 19 `useActionState`. Form field primitives (`Input`/`Textarea`/`Label`)
+are hand-authored to stay dependency-free and on-theme.
+
+**Consequences.** Lead capture works once two env vars are set, with no domain
+required; secrets never reach the browser; the Worker bundle stays small. The
+form degrades gracefully (shows a direct-email fallback) when unconfigured or on
+send failure. Trade-offs: the honeypot is weaker than a CAPTCHA (Cloudflare
+Turnstile is the planned upgrade), and hand-rolled validation must be kept in
+sync with the form fields.

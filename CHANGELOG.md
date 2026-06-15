@@ -12,6 +12,20 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **Contact page + form** — `/contact` with an accessible form (name, email,
+  message) posting to a Next.js **server action** (runs on the Worker). Typed,
+  hand-rolled validation (`lib/contact/validation.ts`), a honeypot for spam,
+  email delivery via Resend's REST API (`lib/contact/email.ts`, env-driven,
+  no SDK), and `useActionState`-driven pending/success/error UI. New
+  `Input`/`Textarea`/`Label` primitives.
+
+### Changed
+
+- Primary CTA + nav "Contact" now route to `/contact` (was the home `#contact`
+  anchor / `mailto`). `/contact` added to the sitemap.
+
+### Added
+
 - **Cloudflare Workers deploy config** — committed OpenNext adapter setup
   (`wrangler.jsonc`, `open-next.config.ts`, `next.config.ts` dev hook,
   `@opennextjs/cloudflare` + `wrangler` deps, and `deploy`/`preview`/`cf-build`

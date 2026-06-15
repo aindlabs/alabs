@@ -52,6 +52,7 @@ e:/Code/AI/ALabs
     │   ├── layout.tsx      # shell (header/footer, fonts, metadata)
     │   ├── page.tsx        # home
     │   ├── services/       # /services index + [slug] detail (SSG)
+    │   ├── contact/        # /contact page + server action (actions.ts)
     │   ├── opengraph-image.tsx / twitter-image.tsx  # social images (per segment)
     │   ├── sitemap.ts      # sitemap.xml
     │   ├── robots.ts       # robots.txt
@@ -66,6 +67,7 @@ e:/Code/AI/ALabs
     ├── data/               # content collections (services, stats, process, values)
     ├── hooks/              # shared React hooks (added when needed)
     ├── lib/                # framework-agnostic helpers (cn, seo, animations, structured-data, og)
+    │   └── contact/        # contact validation + Resend email sender
     └── types/              # shared TypeScript content models
 ```
 
@@ -96,6 +98,24 @@ e:/Code/AI/ALabs
 - **Dynamic routes** — content-driven routes (e.g. `/services/[slug]`) use
   `generateStaticParams` for SSG, `generateMetadata` for per-route tags, and
   `dynamicParams = false` so only known slugs render (others 404).
+- **Forms & server actions** — forms post to a `"use server"` action (runs on
+  the Worker). Validation is centralized and typed (`lib/contact/validation.ts`);
+  secrets (e.g. the email API key) stay server-side. Client form state uses
+  React 19 `useActionState`. Spam is filtered with a honeypot field.
+
+## Environment variables
+
+Set these on the Cloudflare Worker (dashboard → Settings → Variables, or
+`wrangler secret put`). All are optional for build; the contact form needs them
+to actually deliver mail.
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `RESEND_API_KEY` | Resend API key — enables contact email delivery (secret). | — (form shows email fallback if unset) |
+| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `siteConfig.contact.email` |
+| `CONTACT_FROM_EMAIL` | Sender address. | `A Labs <onboarding@resend.dev>` (works without a custom domain) |
+
+For local dev, put the same keys in a `.dev.vars` file (git-ignored).
 
 ## Data flow example (footer "Services" column)
 

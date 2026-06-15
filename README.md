@@ -23,6 +23,23 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | Lint with ESLint. |
 | `npm run typecheck` | Type-check without emitting. |
 
+## Environment variables
+
+The contact form delivers email via [Resend](https://resend.com). Set these on
+the Cloudflare Worker (dashboard → **Settings → Variables & Secrets**, or
+`npx wrangler secret put <NAME>`); for local dev, add them to a `.dev.vars` file
+(git-ignored). All are optional — without them the form shows a direct-email
+fallback.
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `RESEND_API_KEY` | Resend API key (secret) — enables email delivery. | — |
+| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `siteConfig.contact.email` |
+| `CONTACT_FROM_EMAIL` | Sender address. | `A Labs <onboarding@resend.dev>` |
+
+> Resend's `onboarding@resend.dev` sender works without a custom domain — set
+> `CONTACT_TO_EMAIL` to your verified inbox to start receiving leads.
+
 ## Documentation
 
 | Doc | What's in it |

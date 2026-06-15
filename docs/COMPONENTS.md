@@ -17,6 +17,9 @@ Legend: **RSC** = React Server Component (default) · **Client** = `"use client"
 | `IconBadge` | `icon-badge.tsx` | RSC | Rounded brand-tinted icon tile (decorative). | `icon`, `className` |
 | `Reveal` | `reveal.tsx` | Client | Scroll-triggered entrance for one element; reduced-motion aware. | `variants`, `asItem` + motion props |
 | `RevealGroup` | `reveal.tsx` | Client | Stagger orchestrator for `Reveal asItem` children. | `variants` + motion props |
+| `Input` | `input.tsx` | RSC | Token-styled text input; `aria-invalid` styling. | native `<input>` props |
+| `Textarea` | `textarea.tsx` | RSC | Token-styled multiline input. | native `<textarea>` props |
+| `Label` | `label.tsx` | RSC | Form label (associate via `htmlFor`). | native `<label>` props |
 
 Barrel: `@/components/ui` (primitives only).
 
@@ -61,7 +64,8 @@ from `data/`.
 | `Services` | `services.tsx` | `#services` — staggered grid of `ServiceCard` from the catalog. |
 | `About` | `about.tsx` | `#about` — intro + stats grid + engineering values (`FeatureCard`). |
 | `Process` | `process.tsx` | `#work` — numbered delivery steps (numbers derived from order). |
-| `Cta` | `cta.tsx` | `#contact` — closing call to action (mailto until a contact page exists). |
+| `Cta` | `cta.tsx` | `#contact` — closing call to action; routes to `/contact`. |
+| `ContactForm` | `contact-form.tsx` | **Client** — the contact form; `useActionState` + the contact server action, with inline validation and pending/success/error states. |
 
 ### Section building blocks
 

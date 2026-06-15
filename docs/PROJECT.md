@@ -81,4 +81,6 @@ Development Rules:
 * **Landing page** — complete: Hero, Services, About, Process, CTA (config-driven, animated, accessible).
 * **Service routes & SEO** — complete: `/services` index + statically-generated `/services/[slug]` detail pages, sitemap/robots, and JSON-LD structured data.
 * **Social images** — complete: dynamic Open Graph + Twitter images for home, services index, and per-service pages.
-* **Next** — contact form/page, blog or case studies, and analytics.
+* **Deploy & CI** — complete: GitHub Actions CI + Cloudflare Workers (OpenNext), live at `alabs.ceo-alabs.workers.dev`.
+* **Contact** — complete: `/contact` page with a server-action form (typed validation, honeypot, Resend email). Set `RESEND_API_KEY` + `CONTACT_TO_EMAIL` to enable delivery.
+* **Next** — case studies/blog, analytics, a custom domain, and Cloudflare Turnstile on the form.
