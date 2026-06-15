@@ -42,7 +42,10 @@ export const siteConfig: SiteConfig = {
   url: "https://alabs.ceo-alabs.workers.dev",
   locale: "en",
   contact: {
-    email: "hello@alabs.example.com",
+    // Public contact address, sourced from the environment so it isn't
+    // hardcoded. Exposed to the client (NEXT_PUBLIC_*); falls back to a
+    // placeholder when unset. See .env.example.
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@alabs.example.com",
   },
   nav: primaryNav,
   footerColumns: [

@@ -111,8 +111,9 @@ to actually deliver mail.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email (footer/contact/mailto). Build-time; exposed to the browser. | `hello@alabs.example.com` |
 | `RESEND_API_KEY` | Resend API key — enables contact email delivery (secret). | — (form shows email fallback if unset) |
-| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `siteConfig.contact.email` |
+| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `NEXT_PUBLIC_CONTACT_EMAIL` |
 | `CONTACT_FROM_EMAIL` | Sender address. | `A Labs <onboarding@resend.dev>` (works without a custom domain) |
 
 For local dev, put the same keys in a `.dev.vars` file (git-ignored).

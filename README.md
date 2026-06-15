@@ -33,9 +33,12 @@ fallback.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email (footer, contact page, mailto). Build-time, exposed to the browser. | `hello@alabs.example.com` |
 | `RESEND_API_KEY` | Resend API key (secret) — enables email delivery. | — |
-| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `siteConfig.contact.email` |
+| `CONTACT_TO_EMAIL` | Inbox that receives submissions. | `NEXT_PUBLIC_CONTACT_EMAIL` |
 | `CONTACT_FROM_EMAIL` | Sender address. | `A Labs <onboarding@resend.dev>` |
+
+Copy `.env.example` to `.env.local` for local development.
 
 > Resend's `onboarding@resend.dev` sender works without a custom domain — set
 > `CONTACT_TO_EMAIL` to your verified inbox to start receiving leads.

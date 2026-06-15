@@ -23,6 +23,8 @@ adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Primary CTA + nav "Contact" now route to `/contact` (was the home `#contact`
   anchor / `mailto`). `/contact` added to the sitemap.
+- Contact email is now sourced from `NEXT_PUBLIC_CONTACT_EMAIL` (with a
+  fallback) instead of being hardcoded. Added `.env.example` / `.env.local`.
 
 ### Added
 
